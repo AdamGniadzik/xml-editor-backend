@@ -1,0 +1,21 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://tempuri.org/ExampleNamespaceSchema.xsd"
+            targetNamespace="http://tempuri.org/ExampleNamespaceSchema.xsd"
+            elementFormDefault="qualified">
+    <xsd:simpleType name="simpleTypeIntegerRestriction">
+        <xsd:restriction base="xsd:integer">
+            <xsd:minInclusive value="0"/>
+            <xsd:maxInclusive value="100"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="simpleTypeEnumeration">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="small"/>
+            <xsd:enumeration value="medium"/>
+            <xsd:enumeration value="large"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="simpleTypeList">
+        <xsd:list itemType="xsd:date"/>
+    </xsd:simpleType>
+</xsd:schema>
