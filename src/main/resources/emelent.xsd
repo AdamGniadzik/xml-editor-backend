@@ -1,0 +1,9 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:tns="http://tempuri.org/ExampleNamespaceSchema.xsd"
+            targetNamespace="http://tempuri.org/ExampleNamespaceSchema.xsd"
+            elementFormDefault="qualified">
+
+    <xsd:element name="nillableDateElement" type="xsd:date" nillable="true"/>
+    <xsd:element name="stringElement" type="xsd:string"/>
+
+</xsd:schema>
