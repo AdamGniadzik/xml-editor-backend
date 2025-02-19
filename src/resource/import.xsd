@@ -1,0 +1,9 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns:import="http://tempuri.org/ExampleImport.xsd"
+            targetNamespace="http://tempuri.org/ExampleImport.xsd"
+            elementFormDefault="unqualified">
+
+    <xsd:simpleType name="importedType">
+        <xsd:list itemType="xsd:date"/>
+    </xsd:simpleType>
+</xsd:schema>
