@@ -1,5 +1,6 @@
 package com.ironbark.xml.editor;
 
+import com.ironbark.xml.editor.parser.ParseInterruptedException;
 import lombok.extern.slf4j.Slf4j;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;

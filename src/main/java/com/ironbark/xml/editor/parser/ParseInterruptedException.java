@@ -1,4 +1,4 @@
-package com.ironbark.xml.editor;
+package com.ironbark.xml.editor.parser;
 
 public class ParseInterruptedException extends RuntimeException{
     public ParseInterruptedException() {

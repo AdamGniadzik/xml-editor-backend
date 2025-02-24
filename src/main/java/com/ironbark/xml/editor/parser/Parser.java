@@ -1,9 +1,8 @@
-package com.ironbark.xml.editor;
+package com.ironbark.xml.editor.parser;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
+import com.ironbark.xml.editor.FileLoader;
+import com.ironbark.xml.editor.ImportHandler;
 import com.ironbark.xml.editor.util.NamedNodeMapIterable;
 import com.ironbark.xml.editor.util.NodeListIterable;
 import lombok.AllArgsConstructor;
@@ -14,24 +13,25 @@ import org.w3c.dom.Node;
 
 import java.util.*;
 
+import static com.ironbark.xml.editor.parser.ParserOutputConstants.*;
+import static com.ironbark.xml.editor.parser.XsdSchemaConstants.*;
+
 @Component
 @AllArgsConstructor
 public class Parser {
 
-    private static final String TARGET_NAMESPACE = "targetNamespace";
-    private static final String XMLNS = "xmlns";
+
     private static final int SEMICOLON_LENGTH = 1;
     private final ImportHandler importHandler;
     private final Gson gson = new Gson();
     private final FileLoader fileLoader;
 
-    private static final String NAME = "name";
-    private static final String TYPE = "type";
-    private static final String XSD_ELEMENT = "xsd:element";
+
 
 
     public JsonElement parseXsdFiles(byte[] zipBytes) {
         try {
+            JsonArray output = new JsonArray();
             Map<Integer, Map<String, String>> documentNamespaceBucket = new HashMap<>();
             Queue<NodeWrapper> nodeQueue = new LinkedList<>();
             List<Document> documents = fileLoader.loadDocumentsFromZip(zipBytes, UUID.randomUUID());
@@ -50,7 +50,7 @@ public class Parser {
             while(!nodeQueue.isEmpty()){
                     NodeWrapper node = nodeQueue.poll();
                     if(node.element.getNodeName().equals(XSD_ELEMENT)){
-                        parseElement(node.element);
+                        output.add(parseElement(node.element));
                     }
             }
         } catch (Exception e) {
@@ -81,6 +81,7 @@ public class Parser {
     private JsonElement parseElement(Element element) {
         JsonObject jsonElement = new JsonObject();
         jsonElement.add(NAME, new JsonPrimitive(element.getAttribute(NAME)));
+        jsonElement.add(TYPE, new JsonPrimitive(element.getAttribute(TYPE)));
         jsonElement.add(TYPE, new JsonPrimitive(element.getAttribute(TYPE)));
         System.out.println(jsonElement);
         return jsonElement;
